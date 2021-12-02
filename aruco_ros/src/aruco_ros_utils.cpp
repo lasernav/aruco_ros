@@ -72,6 +72,9 @@ tf2::Transform aruco_ros::arucoMarker2Tf2(const aruco::Marker &marker)
   marker.Rvec.convertTo(Rvec64, CV_64FC1);
   cv::Rodrigues(Rvec64, rot);
   cv::Mat tran64;
+
+  //ROS_INFO("Tvec: %f %f %f",  marker.Tvec.at<float>(0, 0),  marker.Tvec.at<float>(1, 0),  marker.Tvec.at<float>(2, 0));
+
   marker.Tvec.convertTo(tran64, CV_64FC1);
 
   tf2::Matrix3x3 tf_rot(rot.at<double>(0, 0), rot.at<double>(0, 1), rot.at<double>(0, 2), rot.at<double>(1, 0),

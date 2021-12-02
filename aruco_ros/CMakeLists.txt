@@ -54,11 +54,16 @@ add_executable(marker_publisher src/marker_publish.cpp
 add_dependencies(marker_publisher ${PROJECT_NAME}_gencfg)
 target_link_libraries(marker_publisher ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
 
+add_executable(markerarray src/simple_markerarray.cpp
+                      src/aruco_ros_utils.cpp)
+add_dependencies(markerarray ${PROJECT_NAME}_gencfg)
+target_link_libraries(markerarray ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+
 #############
 ## Install ##
 #############
 
-install(TARGETS single double marker_publisher aruco_ros_utils
+install(TARGETS single double marker_publisher markerarray aruco_ros_utils
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
