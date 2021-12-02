@@ -37,14 +37,14 @@ aruco::CameraParameters aruco_ros::rosCameraInfo2ArucoCamParams(const sensor_msg
     for (int i = 0; i < 9; ++i)
       cameraMatrix.at<double>(i % 3, i - (i % 3) * 3) = cam_info.K[i];
 
-    if (cam_info.D.size() == 4)
+    if (cam_info.D.size() >= 4)
     {
       for (int i = 0; i < 4; ++i)
         distorsionCoeff.at<double>(i, 0) = cam_info.D[i];
     }
     else
     {
-      ROS_WARN("length of camera_info D vector is not 4, assuming zero distortion...");
+      ROS_WARN("length of camera_info D vector is less than 4, assuming zero distortion...");
       for (int i = 0; i < 4; ++i)
         distorsionCoeff.at<double>(i, 0) = 0;
     }
